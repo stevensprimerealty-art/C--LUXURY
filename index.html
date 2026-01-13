@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>C-LUXURY</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <!-- Left: 3 dotted menu -->
+    <button class="icon-btn" id="openMenu" aria-label="Open menu" type="button">
+      <span class="icon icon-dots" aria-hidden="true"></span>
+    </button>
+
+    <!-- Center brand -->
+    <a class="brand" href="#">C-LUXURY</a>
+
+    <!-- Right actions -->
+    <div class="header-actions">
+      <button class="icon-btn" id="openSearch" aria-label="Open search" type="button">
+        <span class="icon icon-search" aria-hidden="true"></span>
+      </button>
+
+      <a class="icon-btn" href="#" aria-label="Open cart">
+        <span class="icon icon-cart" aria-hidden="true"></span>
+      </a>
+    </div>
+  </header>
+
+  <!-- MENU OVERLAY -->
+  <aside class="overlay" id="menuOverlay" aria-hidden="true">
+    <div class="overlay-panel" role="dialog" aria-modal="true" aria-label="Menu">
+      <div class="overlay-top">
+        <span class="overlay-brand">C-LUXURY</span>
+        <button class="icon-btn" id="closeMenu" aria-label="Close menu" type="button">
+          <span class="icon icon-close" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <nav class="menu-links">
+        <a href="#shop">Shop</a>
+        <a href="#new">New</a>
+        <a href="#lookbook">Lookbook</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- SEARCH OVERLAY -->
+  <aside class="overlay" id="searchOverlay" aria-hidden="true">
+    <div class="overlay-panel" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="overlay-top">
+        <span class="overlay-brand">Search</span>
+        <button class="icon-btn" id="closeSearch" aria-label="Close search" type="button">
+          <span class="icon icon-close" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <form class="search-form" onsubmit="return false;">
+        <input class="search-input" type="search" placeholder="Search C-LUXURY..." />
+        <button class="search-submit" type="button">Search</button>
+      </form>
+      <p class="search-note">We’ll connect this to Shopify later.</p>
+    </div>
+  </aside>
+
+  <!-- HERO -->
+  <main class="hero" aria-label="C-LUXURY hero">
+    <section class="hero-slider" id="heroSlider">
+
+      <!-- Slides -->
+      <div class="slides" id="slides">
+        <div class="slide is-active" data-index="0" style="background-image:url('assets/hero-1.jpg')"></div>
+        <div class="slide" data-index="1" style="background-image:url('assets/hero-2.jpg')"></div>
+        <div class="slide" data-index="2" style="background-image:url('assets/hero-3.jpg')"></div>
+        <div class="slide" data-index="3" style="background-image:url('assets/hero-4.jpg')"></div>
+        <div class="slide" data-index="4" style="background-image:url('assets/hero-5.jpg')"></div>
+        <div class="slide" data-index="5" style="background-image:url('assets/hero-6.jpg')"></div>
+      </div>
+
+      <!-- Text + rings + CTA -->
+      <div class="hero-content">
+        <h1 class="hero-title" id="heroTitle">
+          A NEW YEAR<br/>WITH PRESENCE
+        </h1>
+
+        <div class="rings" id="rings" aria-label="Hero slide selector">
+          <button class="ring is-active" data-go="0" aria-label="Slide 1" type="button"><span class="ring-fill"></span></button>
+          <button class="ring" data-go="1" aria-label="Slide 2" type="button"><span class="ring-fill"></span></button>
+          <button class="ring" data-go="2" aria-label="Slide 3" type="button"><span class="ring-fill"></span></button>
+          <button class="ring" data-go="3" aria-label="Slide 4" type="button"><span class="ring-fill"></span></button>
+          <button class="ring" data-go="4" aria-label="Slide 5" type="button"><span class="ring-fill"></span></button>
+          <button class="ring" data-go="5" aria-label="Slide 6" type="button"><span class="ring-fill"></span></button>
+        </div>
+
+        <!-- Shop Now stays under rings -->
+        <a class="cta" href="#shop">SHOP NOW</a>
+      </div>
+
+      <div class="hero-vignette" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
