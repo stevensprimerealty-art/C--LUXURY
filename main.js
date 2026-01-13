@@ -110,3 +110,49 @@ window.addEventListener("scroll", () => {
     header.classList.remove("is-scrolled");
   }
 });
+
+/* =============================
+   Gift touch scroll: fade in/out + safe loop
+   ============================= */
+(() => {
+  const scroller = document.getElementById("giftScroller");
+  const cards = Array.from(document.querySelectorAll(".gift-card"));
+  if (!scroller || cards.length === 0) return;
+
+  // Fade in/out when card is in view inside the scroller
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add("is-in");
+        e.target.classList.remove("is-out");
+      } else if (e.intersectionRatio === 0) {
+        // when fully out, soften it
+        e.target.classList.add("is-out");
+      }
+    });
+  }, { root: scroller, threshold: 0.55 });
+
+  cards.forEach(c => io.observe(c));
+
+  // Safe loop: when you reach the duplicate end card, jump back to the first
+  let loopLock = false;
+  scroller.addEventListener("scroll", () => {
+    if (loopLock) return;
+
+    const endCard = scroller.querySelector('[data-loop="end"]');
+    const startCard = scroller.querySelector('[data-loop="start"]');
+    if (!endCard || !startCard) return;
+
+    const endRect = endCard.getBoundingClientRect();
+    const rootRect = scroller.getBoundingClientRect();
+
+    // if end card is mostly visible
+    const visible = endRect.left < (rootRect.left + 30);
+    if (visible) {
+      loopLock = true;
+      // jump back instantly (no break, no flicker)
+      scroller.scrollLeft = 0;
+      setTimeout(() => { loopLock = false; }, 120);
+    }
+  }, { passive: true });
+})();
