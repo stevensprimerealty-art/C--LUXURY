@@ -317,3 +317,97 @@ body{
     linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.08));
   z-index:5;
 }
+
+/* =============================
+   C-LUXURY — Gift touch scroll section
+   ============================= */
+
+.gift-strip{
+  background:#fff;
+  color:#111;
+  padding: 26px 0 34px;
+}
+
+.gift-head{
+  padding: 0 18px 14px;
+}
+.gift-kicker{
+  font-weight:800;
+  letter-spacing:0.18em;
+  font-size:12px;
+}
+.gift-sub{
+  margin-top:6px;
+  font-size:14px;
+  letter-spacing:0.02em;
+  opacity:0.85;
+}
+
+/* Touch horizontal scroll */
+.gift-scroller{
+  display:flex;
+  gap:14px;
+  padding: 10px 18px 6px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+.gift-scroller::-webkit-scrollbar{ height:0; }
+
+/* Card */
+.gift-card{
+  flex: 0 0 auto;
+  width: min(78vw, 340px);
+  scroll-snap-align: start;
+  position:relative;
+
+  opacity:0;
+  transform: translateY(10px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+.gift-card.is-in{
+  opacity:1;
+  transform: translateY(0);
+}
+.gift-card.is-out{
+  opacity:0.15;
+}
+
+/* Label top-left */
+.gift-label{
+  position:absolute;
+  left:14px;
+  top:14px;
+  z-index:3;
+
+  font-size:13px;
+  letter-spacing:0.10em;
+  text-transform:uppercase;
+  color:#fff;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.55);
+}
+.gift-label em{
+  font-style: italic; /* you requested italics */
+}
+
+/* Image cinematic boxed */
+.gift-img{
+  height: 220px;
+  border-radius:16px;
+  background-size:cover;
+  background-position:center;
+  overflow:hidden;
+  position:relative;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+}
+
+/* cinematic overlay */
+.gift-img::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(70% 55% at 50% 35%, rgba(0,0,0,0.05), rgba(0,0,0,0.55)),
+    linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05));
+}
