@@ -166,19 +166,42 @@
     </header>
 
     <div class="na-grid">
-      <!-- LEFT PINNED PRODUCT -->
-      <aside class="na-left" aria-label="Featured new arrival">
-        <div class="na-left-media">
-          <!-- IMPORTANT: use a real file that exists -->
-          <img id="naLeftImg" src="assets/ctank-black-main.jpg" alt="New arrival product preview" />
-          <div class="na-left-fade" id="naLeftFade" aria-hidden="true"></div>
-        </div>
+      <!-- LEFT STATIC DISPLAY (WHITE BOX) -->
+<aside class="na-display">
 
-        <div class="na-left-meta">
-          <div class="na-left-name" id="naLeftName">C-TANK BLACK SKULL JERSEY</div>
-          <button class="na-left-more" type="button" id="naLeftMore">SEE MORE</button>
-        </div>
-      </aside>
+  <div class="na-card-box">
+
+    <!-- MAIN IMAGE -->
+    <img
+      id="naMainImg"
+      class="na-img is-visible"
+      src="assets/ctank-white-main.jpg"
+      alt="C-Tank White"
+    />
+
+    <!-- MOCKUP IMAGE -->
+    <img
+      id="naMockImg"
+      class="na-img"
+      src=""
+      alt="Mockup preview"
+    />
+
+    <!-- CONTROLS -->
+    <button class="na-close" id="naClose">×</button>
+    <button class="na-nav left" id="naPrev">‹</button>
+    <button class="na-nav right" id="naNext">›</button>
+
+  </div>
+
+  <div class="na-info">
+    <div class="na-name" id="naDisplayName">
+      C-TANK WHITE SKULL JERSEY
+    </div>
+    <div class="na-price">$21.39</div>
+  </div>
+
+</aside>
 
       <!-- RIGHT SLIDER -->
       <div class="na-right">
