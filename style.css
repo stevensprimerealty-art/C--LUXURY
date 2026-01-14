@@ -108,3 +108,75 @@ body{
   background-position:center;
   box-shadow:0 18px 40px rgba(0,0,0,.12);
 }
+
+/* =============================
+   LOCK DARK HERO HEADER (DO NOT TOUCH ABOVE)
+   ============================= */
+
+/* Header floats over hero */
+.site-header{
+  background: transparent !important;
+  border-bottom: none !important;
+}
+
+/* Brand stays white */
+.site-header .brand{
+  color:#fff !important;
+}
+
+/* Icon buttons (menu, search, cart) */
+.icon-btn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background: rgba(0,0,0,.45) !important;
+  border: 1px solid rgba(255,255,255,.35) !important;
+  backdrop-filter: blur(10px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Icon symbols */
+.icon{
+  color:#fff !important;
+  opacity:.95;
+}
+
+/* Prevent white bar flash */
+.hero{
+  margin-top:0 !important;
+}
+
+/* =============================
+   ICON DRAWING (RESTORE HEADER)
+   ============================= */
+
+.icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  position: relative;
+}
+
+/* Dots menu */
+.icon-dots::before {
+  content: "⋮";
+  font-size: 18px;
+  color: #fff;
+  line-height: 1;
+}
+
+/* Search */
+.icon-search::before {
+  content: "🔍";
+  font-size: 15px;
+  filter: grayscale(1) brightness(2);
+}
+
+/* Cart */
+.icon-cart::before {
+  content: "👜";
+  font-size: 15px;
+  filter: grayscale(1) brightness(2);
+}
