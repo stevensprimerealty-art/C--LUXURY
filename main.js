@@ -1,72 +1,45 @@
-/* =============================
-   HERO SLIDER — STABLE & LOCKED
-   ============================= */
+const headlines = [
+  "A NEW YEAR\nWITH PRESENCE",
+  "LUXURY\nWITHOUT NOISE",
+  "SILENCE\nIS POWER",
+  "PRESENCE\nWITHOUT NOISE",
+  "SILENCE\nCONNOTES NOISE",
+  "LUXURY\nWITHOUT NOISE"
+];
 
-document.addEventListener("DOMContentLoaded", () => {
-  const headlines = [
-    "A NEW YEAR\nWITH PRESENCE",
-    "SILENCE\nCONNOTES NOISE",
-    "LUXURY\nWITHOUT NOISE",
-    "PRESENCE\nWITHOUT NOISE",
-    "SILENCE\nIS POWER",
-    "LUXURY\nWITHOUT NOISE"
-  ];
+const slides = document.querySelectorAll(".slide");
+const title = document.getElementById("heroTitle");
+const rings = document.querySelectorAll(".ring");
 
-  const slides = document.querySelectorAll(".slide");
-  const titleEl = document.getElementById("heroTitle");
-  const rings = document.querySelectorAll(".ring");
+let i = 0;
 
-  if (!slides.length || !titleEl || !rings.length) return;
+function show(n){
+  slides.forEach(s=>s.classList.remove("is-active"));
+  rings.forEach(r=>r.classList.remove("is-active"));
 
-  let index = 0;
-  const INTERVAL = 4500;
+  slides[n].classList.add("is-active");
+  rings[n].classList.add("is-active");
 
-  function showSlide(i) {
-    slides.forEach(s => s.classList.remove("is-active"));
-    rings.forEach(r => r.classList.remove("is-active"));
+  title.classList.add("is-fading");
+  setTimeout(()=>{
+    title.innerHTML = headlines[n].replace(/\n/g,"<br>");
+    title.classList.remove("is-fading");
+  },250);
+}
 
-    slides[i].classList.add("is-active");
-    rings[i].classList.add("is-active");
+setInterval(()=>{
+  i = (i+1)%slides.length;
+  show(i);
+},4500);
 
-    titleEl.classList.add("is-fading");
-    setTimeout(() => {
-      titleEl.innerHTML = headlines[i].replace(/\n/g, "<br>");
-      titleEl.classList.remove("is-fading");
-    }, 220);
-  }
-
-  // 🔑 VERY IMPORTANT — first render
-  showSlide(index);
-
-  setInterval(() => {
-    index = (index + 1) % slides.length;
-    showSlide(index);
-  }, INTERVAL);
-
-  rings.forEach((ring, i) => {
-    ring.addEventListener("click", () => {
-      index = i;
-      showSlide(index);
-    });
-  });
+rings.forEach((r,idx)=>{
+  r.onclick=()=>{i=idx;show(i);}
 });
 
-/* =============================
-   GIFT STRIP — SAFE LOOP
-   ============================= */
-
-(() => {
-  const scroller = document.getElementById("giftScroller");
-  if (!scroller) return;
-
-  scroller.addEventListener(
-    "scroll",
-    () => {
-      const maxScroll = scroller.scrollWidth - scroller.clientWidth;
-      if (scroller.scrollLeft >= maxScroll - 2) {
-        scroller.scrollLeft = 0;
-      }
-    },
-    { passive: true }
-  );
-})();
+/* Gift loop */
+const scroller = document.getElementById("giftScroller");
+scroller.addEventListener("scroll",()=>{
+  if(scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth-5){
+    scroller.scrollLeft = 0;
+  }
+});
