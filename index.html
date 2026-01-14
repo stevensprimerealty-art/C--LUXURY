@@ -2,160 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>C-LUXURY</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <!-- Left: 3 dotted menu -->
-    <button class="icon-btn" id="openMenu" aria-label="Open menu" type="button">
-      <span class="icon icon-dots" aria-hidden="true"></span>
-    </button>
+<header class="site-header">
+  <button class="icon-btn" id="openMenu"><span class="icon icon-dots"></span></button>
+  <div class="brand">C-LUXURY</div>
+  <div class="header-actions">
+    <button class="icon-btn" id="openSearch"><span class="icon icon-search"></span></button>
+    <button class="icon-btn"><span class="icon icon-cart"></span></button>
+  </div>
+</header>
 
-    <!-- Center brand -->
-    <a class="brand" href="#">C-LUXURY</a>
+<!-- HERO -->
+<main class="hero">
+  <section class="hero-slider">
 
-    <!-- Right actions -->
-    <div class="header-actions">
-      <button class="icon-btn" id="openSearch" aria-label="Open search" type="button">
-        <span class="icon icon-search" aria-hidden="true"></span>
-      </button>
-
-      <a class="icon-btn" href="#" aria-label="Open cart">
-        <span class="icon icon-cart" aria-hidden="true"></span>
-      </a>
+    <div class="slides">
+      <div class="slide is-active" style="background-image:url('assets/hero-1.jpg')"></div>
+      <div class="slide" style="background-image:url('assets/hero-2.jpg')"></div>
+      <div class="slide" style="background-image:url('assets/hero-3.jpg')"></div>
+      <div class="slide" style="background-image:url('assets/hero-4.jpg')"></div>
+      <div class="slide" style="background-image:url('assets/hero-5.jpg')"></div>
+      <div class="slide" style="background-image:url('assets/hero-6.jpg')"></div>
     </div>
-  </header>
 
-  <!-- MENU OVERLAY -->
-  <aside class="overlay" id="menuOverlay" aria-hidden="true">
-    <div class="overlay-panel" role="dialog" aria-modal="true" aria-label="Menu">
-      <div class="overlay-top">
-        <span class="overlay-brand">C-LUXURY</span>
-        <button class="icon-btn" id="closeMenu" aria-label="Close menu" type="button">
-          <span class="icon icon-close" aria-hidden="true"></span>
-        </button>
+    <div class="hero-content">
+      <h1 class="hero-title" id="heroTitle">A NEW YEAR<br>WITH PRESENCE</h1>
+
+      <div class="rings">
+        <button class="ring is-active"></button>
+        <button class="ring"></button>
+        <button class="ring"></button>
+        <button class="ring"></button>
+        <button class="ring"></button>
+        <button class="ring"></button>
       </div>
 
-      <nav class="menu-links">
-        <a href="#shop">Shop</a>
-        <a href="#new">New</a>
-        <a href="#lookbook">Lookbook</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <a class="cta">SHOP NOW</a>
     </div>
-  </aside>
 
-  <!-- SEARCH OVERLAY -->
-  <aside class="overlay" id="searchOverlay" aria-hidden="true">
-    <div class="overlay-panel" role="dialog" aria-modal="true" aria-label="Search">
-      <div class="overlay-top">
-        <span class="overlay-brand">Search</span>
-        <button class="icon-btn" id="closeSearch" aria-label="Close search" type="button">
-          <span class="icon icon-close" aria-hidden="true"></span>
-        </button>
-      </div>
+    <div class="hero-vignette"></div>
+  </section>
+</main>
 
-      <form class="search-form" onsubmit="return false;">
-        <input class="search-input" type="search" placeholder="Search C-LUXURY..." />
-        <button class="search-submit" type="button">Search</button>
-      </form>
-      <p class="search-note">We’ll connect this to Shopify later.</p>
-    </div>
-  </aside>
-
-  <!-- HERO -->
-  <main class="hero" aria-label="C-LUXURY hero">
-    <section class="hero-slider" id="heroSlider">
-
-      <!-- Slides -->
-      <div class="slides" id="slides">
-        <div class="slide is-active" data-index="0" style="background-image:url('assets/hero-1.jpg')"></div>
-        <div class="slide" data-index="1" style="background-image:url('assets/hero-2.jpg')"></div>
-        <div class="slide" data-index="2" style="background-image:url('assets/hero-3.jpg')"></div>
-        <div class="slide" data-index="3" style="background-image:url('assets/hero-4.jpg')"></div>
-        <div class="slide" data-index="4" style="background-image:url('assets/hero-5.jpg')"></div>
-        <div class="slide" data-index="5" style="background-image:url('assets/hero-6.jpg')"></div>
-      </div>
-
-      <!-- Text + rings + CTA -->
-      <div class="hero-content">
-        <h1 class="hero-title" id="heroTitle">
-          A NEW YEAR<br/>WITH PRESENCE
-        </h1>
-
-        <div class="rings" id="rings" aria-label="Hero slide selector">
-          <button class="ring is-active" data-go="0" aria-label="Slide 1" type="button"><span class="ring-fill"></span></button>
-          <button class="ring" data-go="1" aria-label="Slide 2" type="button"><span class="ring-fill"></span></button>
-          <button class="ring" data-go="2" aria-label="Slide 3" type="button"><span class="ring-fill"></span></button>
-          <button class="ring" data-go="3" aria-label="Slide 4" type="button"><span class="ring-fill"></span></button>
-          <button class="ring" data-go="4" aria-label="Slide 5" type="button"><span class="ring-fill"></span></button>
-          <button class="ring" data-go="5" aria-label="Slide 6" type="button"><span class="ring-fill"></span></button>
-        </div>
-
-        <!-- Shop Now stays under rings -->
-        <a class="cta" href="#shop">SHOP NOW</a>
-      </div>
-
-      <div class="hero-vignette" aria-hidden="true"></div>
-    </section>
-  </main>
-
-  <!-- GIFT SCROLL SECTION -->
-<section class="gift-strip" id="gift-strip">
+<!-- GIFT STRIP -->
+<section class="gift-strip">
   <div class="gift-head">
     <div class="gift-kicker">C-LUXURY</div>
     <div class="gift-sub">Create it. Share it. Get gifted.</div>
   </div>
 
-  <div class="gift-scroller" id="giftScroller" aria-label="C-LUXURY gift banners">
-
-    <!-- 1 -->
-    <article class="gift-card" data-loop="start">
+  <div class="gift-scroller" id="giftScroller">
+    <article class="gift-card">
       <div class="gift-label"><em>C-LUXURY WISHLIST</em></div>
       <div class="gift-img" style="background-image:url('assets/wishlist.jpg')"></div>
     </article>
 
-    <!-- 2 -->
     <article class="gift-card">
       <div class="gift-label"><em>GIFTS FOR HER</em></div>
       <div class="gift-img" style="background-image:url('assets/gift-her.jpg')"></div>
     </article>
 
-    <!-- 3 -->
     <article class="gift-card">
-      <div class="gift-label"><em>GIFT FOR HIM</em></div>
+      <div class="gift-label"><em>GIFTS FOR HIM</em></div>
       <div class="gift-img" style="background-image:url('assets/gift-him.jpg')"></div>
     </article>
 
-    <!-- 4 -->
     <article class="gift-card">
-      <div class="gift-label"><em>SPECIAL ITEMS FOR YOU</em></div>
+      <div class="gift-label"><em>SPECIAL ITEMS</em></div>
       <div class="gift-img" style="background-image:url('assets/special-items.jpg')"></div>
     </article>
 
-    <!-- 5 -->
     <article class="gift-card">
-      <div class="gift-label"><em>C-LUXURY DIGITAL CARDS<br>FOR YOU</em></div>
+      <div class="gift-label"><em>DIGITAL CARDS</em></div>
       <div class="gift-img" style="background-image:url('assets/digital-cards.jpg')"></div>
     </article>
-
-    <!-- duplicate of 1 (safe loop back) -->
-    <article class="gift-card" data-loop="end">
-      <div class="gift-label"><em>C-LUXURY WISHLIST</em></div>
-      <div class="gift-img" style="background-image:url('assets/wishlist.jpg')"></div>
-    </article>
-
-  
- <script src="main.js"></script>
-</body>
-</html>
-
   </div>
 </section>
 
+<script src="main.js"></script>
+</body>
+</html>
