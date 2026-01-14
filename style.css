@@ -355,15 +355,16 @@ body{
 }
 .gift-scroller::-webkit-scrollbar{ height:0; }
 
-/* Card */
 .gift-card{
   flex: 0 0 auto;
   width: min(78vw, 340px);
   scroll-snap-align: start;
   position:relative;
 
-  opacity:0;
-  transform: translateY(10px);
+  /* ✅ SHOW by default */
+  opacity:1;
+  transform:none;
+
   transition: opacity .35s ease, transform .35s ease;
 }
 .gift-card.is-in{
