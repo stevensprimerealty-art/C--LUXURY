@@ -411,3 +411,56 @@ body{
     radial-gradient(70% 55% at 50% 35%, rgba(0,0,0,0.05), rgba(0,0,0,0.55)),
     linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05));
 }
+
+/* =============================
+   C NEW ARRIVALS — WHITE SECTION FIX
+   ============================= */
+
+.new-arrivals{
+  background:#ffffff;
+  color:#111111;
+  padding: 48px 0 64px;
+}
+
+/* inner wrapper spacing */
+.na-wrap{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 18px;
+}
+
+/* title */
+.na-title{
+  color:#111;
+  letter-spacing:0.18em;
+  font-weight:900;
+}
+
+/* LEFT pinned card text */
+.na-left-name{
+  color:#111;
+}
+
+/* SEE MORE buttons */
+.na-left-more,
+.na-card-more{
+  background:#111;
+  color:#fff;
+  border:1px solid #111;
+}
+
+/* slider cards sit on white cleanly */
+.na-card{
+  background:#fff;
+}
+
+/* name bar under slider */
+.na-namebar{
+  color:#111;
+}
+
+/* modal panel stays white */
+.na-modal-panel{
+  background:#fff;
+  color:#111;
+}
