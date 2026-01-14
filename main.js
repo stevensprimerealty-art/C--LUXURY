@@ -1,9 +1,8 @@
+/* =============================
+   HERO SLIDER — STABLE & LOCKED
+   ============================= */
+
 document.addEventListener("DOMContentLoaded", () => {
-
-  /* =============================
-     HERO SLIDER — STABLE
-     ============================= */
-
   const headlines = [
     "A NEW YEAR\nWITH PRESENCE",
     "SILENCE\nCONNOTES NOISE",
@@ -26,47 +25,48 @@ document.addEventListener("DOMContentLoaded", () => {
     slides.forEach(s => s.classList.remove("is-active"));
     rings.forEach(r => r.classList.remove("is-active"));
 
-    slides[i]?.classList.add("is-active");
-    rings[i]?.classList.add("is-active");
+    slides[i].classList.add("is-active");
+    rings[i].classList.add("is-active");
 
     titleEl.classList.add("is-fading");
     setTimeout(() => {
       titleEl.innerHTML = headlines[i].replace(/\n/g, "<br>");
       titleEl.classList.remove("is-fading");
-    }, 250);
+    }, 220);
   }
 
-  // INIT FIRST SLIDE
-  showSlide(0);
+  // 🔑 VERY IMPORTANT — first render
+  showSlide(index);
 
-  // AUTOPLAY
   setInterval(() => {
     index = (index + 1) % slides.length;
     showSlide(index);
   }, INTERVAL);
 
-  // RING CLICK
   rings.forEach((ring, i) => {
     ring.addEventListener("click", () => {
       index = i;
       showSlide(index);
     });
   });
+});
 
-  /* =============================
-     GIFT STRIP — SAFE LOOP
-     ============================= */
+/* =============================
+   GIFT STRIP — SAFE LOOP
+   ============================= */
 
-  (() => {
-    const scroller = document.getElementById("giftScroller");
-    if (!scroller) return;
+(() => {
+  const scroller = document.getElementById("giftScroller");
+  if (!scroller) return;
 
-    scroller.addEventListener("scroll", () => {
+  scroller.addEventListener(
+    "scroll",
+    () => {
       const maxScroll = scroller.scrollWidth - scroller.clientWidth;
-      if (scroller.scrollLeft >= maxScroll - 5) {
+      if (scroller.scrollLeft >= maxScroll - 2) {
         scroller.scrollLeft = 0;
       }
-    }, { passive: true });
-  })();
-
-});
+    },
+    { passive: true }
+  );
+})();
