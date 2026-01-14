@@ -159,15 +159,12 @@ window.addEventListener("scroll", () => {
 
 
 /* =========================
-   C NEW ARRIVALS logic
-   - Right auto slider
-   - Pause on touch/scroll, resume after 3.7s
-   - Left pinned fades to active item
-   - Name below updates
-   - SEE MORE opens modal (2 mockups)
+   C NEW ARRIVALS logic (FIXED)
    ========================= */
-(function(){
+(function () {
   const slider = document.getElementById("naSlider");
+  if (!slider) return;
+
   const nameEl = document.getElementById("naName");
 
   const leftImg = document.getElementById("naLeftImg");
@@ -180,22 +177,20 @@ window.addEventListener("scroll", () => {
   const modalMock1 = document.getElementById("naModalMock1");
   const modalMock2 = document.getElementById("naModalMock2");
 
-  if(!slider) return;
+  const cards = Array.from(slider.querySelectorAll(".na-card"))
+    .filter(c => !c.classList.contains("na-dup"));
 
-  const cards = Array.from(
-  slider.querySelectorAll(".na-card")
-).filter(c => !c.classList.contains("na-dup"));
+  if (cards.length === 0) return;
 
-  // Auto motion settings
-  const PX_PER_TICK = 0.7;         // speed (increase = faster)
-  const TICK_MS = 16;              // ~60fps
-  const RESUME_AFTER_MS = 3700;    // your requested pause time
+  const PX_PER_TICK = 0.7;
+  const TICK_MS = 16;
+  const RESUME_AFTER_MS = 3700;
 
-  let raf = null;
   let paused = false;
   let resumeTimer = null;
+  let activeIndex = 0;
 
-  function getCardData(card){
+  function getCardData(card) {
     return {
       name: card.getAttribute("data-name") || "",
       main: card.getAttribute("data-main") || "",
@@ -204,110 +199,111 @@ window.addEventListener("scroll", () => {
     };
   }
 
-  function setActive(index){
-    activeIndex = (index + cards.length) % cards.length;
-
+  function setActive(i) {
+    activeIndex = (i + cards.length) % cards.length;
     const data = getCardData(cards[activeIndex]);
 
-    // update name below
-    nameEl.textContent = data.name;
+    if (nameEl) nameEl.textContent = data.name;
 
-    // update pinned left with fade
-    leftFade.style.opacity = "1";
+    if (leftFade) leftFade.style.opacity = "1";
     window.setTimeout(() => {
-      leftImg.src = data.main;
-      leftName.textContent = data.name;
-      leftFade.style.opacity = "0";
+      if (leftImg) leftImg.src = data.main;
+      if (leftName) leftName.textContent = data.name;
+      if (leftFade) leftFade.style.opacity = "0";
     }, 220);
 
-    // store current for left SEE MORE
-    leftMore.dataset.main = data.main;
-    leftMore.dataset.name = data.name;
-    leftMore.dataset.mock1 = data.mock1;
-    leftMore.dataset.mock2 = data.mock2;
+    if (leftMore) {
+      leftMore.dataset.main = data.main;
+      leftMore.dataset.name = data.name;
+      leftMore.dataset.mock1 = data.mock1;
+      leftMore.dataset.mock2 = data.mock2;
+    }
   }
 
-  function openModalFromData(data){
+  function openModalFromData(data) {
+    if (!modal) return;
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
-    modalTitle.textContent = data.name || "PRODUCT";
-    modalMock1.src = data.mock1 || data.main || "";
-    modalMock2.src = data.mock2 || data.main || "";
+    if (modalTitle) modalTitle.textContent = data.name || "PRODUCT";
+    if (modalMock1) modalMock1.src = data.mock1 || data.main || "";
+    if (modalMock2) modalMock2.src = data.mock2 || data.main || "";
   }
 
-  function closeModal(){
+  function closeModal() {
+    if (!modal) return;
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
   }
 
-  // Initial state
-  setActive(0);
-
-  // Card SEE MORE click
-  slider.addEventListener("click", (e) => {
-    const btn = e.target.closest(".na-card-more");
-    if(!btn) return;
-    const card = btn.closest(".na-card");
-    if(!card || card.classList.contains("na-dup")) return;
-
-    pauseThenResume();
-    openModalFromData(getCardData(card));
-  });
-
-  // Left SEE MORE click
-  leftMore.addEventListener("click", () => {
-    pauseThenResume();
-    openModalFromData({
-      name: leftMore.dataset.name || leftName.textContent,
-      main: leftMore.dataset.main || leftImg.src,
-      mock1: leftMore.dataset.mock1 || leftImg.src,
-      mock2: leftMore.dataset.mock2 || leftImg.src
-    });
-  });
-
-  // Close modal
-  modal.addEventListener("click", (e) => {
-    if(e.target && e.target.dataset && e.target.dataset.close){
-      closeModal();
-      return;
-    }
-  });
-  document.addEventListener("keydown", (e) => {
-    if(e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
-  });
-
-  // Auto scrolling loop
-  function tick(){
-    if(!paused){
-      slider.scrollLeft += PX_PER_TICK;
-
-      // when we've scrolled past one card width, update activeIndex
-      const cardW = cards[0].getBoundingClientRect().width + 12; // includes gap
-      const idx = Math.floor(slider.scrollLeft / cardW) % cards.length;
-      if(idx !== activeIndex){
-        setActive(idx);
-      }
-
-      // loop safety: if scroll gets too far into duplicates, jump back smoothly
-      const maxBeforeReset = cardW * cards.length;
-      if(slider.scrollLeft >= maxBeforeReset){
-        slider.scrollLeft -= maxBeforeReset;
-      }
-    }
-    raf = window.setTimeout(tick, TICK_MS);
-  }
-
-  function pauseThenResume(){
+  function pauseThenResume() {
     paused = true;
-    if(resumeTimer) window.clearTimeout(resumeTimer);
+    if (resumeTimer) window.clearTimeout(resumeTimer);
     resumeTimer = window.setTimeout(() => {
       paused = false;
     }, RESUME_AFTER_MS);
   }
 
-  // Pause on any interaction (touch/drag/["pointerdown","touchstart","wheel"].forEach(evt => {
-  slider.addEventListener(evt, pauseThenResume, { passive: true });
-});
+  // Initial
+  setActive(0);
+
+  // Card button opens modal
+  slider.addEventListener("click", (e) => {
+    const btn = e.target.closest(".na-card-more");
+    if (!btn) return;
+
+    const card = btn.closest(".na-card");
+    if (!card || card.classList.contains("na-dup")) return;
+
+    pauseThenResume();
+    openModalFromData(getCardData(card));
+  });
+
+  // Left SEE MORE opens current
+  if (leftMore) {
+    leftMore.addEventListener("click", () => {
+      pauseThenResume();
+      openModalFromData({
+        name: leftMore.dataset.name || (leftName ? leftName.textContent : "PRODUCT"),
+        main: leftMore.dataset.main || (leftImg ? leftImg.src : ""),
+        mock1: leftMore.dataset.mock1 || (leftImg ? leftImg.src : ""),
+        mock2: leftMore.dataset.mock2 || (leftImg ? leftImg.src : "")
+      });
+    });
+  }
+
+  // Close modal
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target && e.target.dataset && e.target.dataset.close) closeModal();
+    });
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal && modal.classList.contains("is-open")) closeModal();
+  });
+
+  // Pause on interaction (FIXED)
+  ["pointerdown", "touchstart", "wheel"].forEach((evt) => {
+    slider.addEventListener(evt, pauseThenResume, { passive: true });
+  });
+
+  // Auto scroll tick
+  function tick() {
+    if (!paused) {
+      slider.scrollLeft += PX_PER_TICK;
+
+      const cardW = cards[0].getBoundingClientRect().width + 12;
+      const idx = Math.floor(slider.scrollLeft / cardW) % cards.length;
+
+      if (idx !== activeIndex) setActive(idx);
+
+      const maxBeforeReset = cardW * cards.length;
+      if (slider.scrollLeft >= maxBeforeReset) {
+        slider.scrollLeft -= maxBeforeReset;
+      }
+    }
+
+    window.setTimeout(tick, TICK_MS);
+  }
 
   tick();
 })();
