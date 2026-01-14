@@ -158,135 +158,152 @@ window.addEventListener("scroll", () => {
 })();
 
 
-/* =========================
-   C NEW ARRIVALS logic (FIXED)
-   ========================= */
-(function () {
+/* =============================
+   C NEW ARRIVALS — IN-BOX MOCKUP + AUTO SLIDER
+   ============================= */
+(() => {
   const slider = document.getElementById("naSlider");
-  if (!slider) return;
+  const box = document.querySelector(".na-card-box");
 
-  const nameEl = document.getElementById("naName");
+  const mainImg = document.getElementById("naMainImg");
+  const mockImg = document.getElementById("naMockImg");
 
-  const leftImg = document.getElementById("naLeftImg");
-  const leftName = document.getElementById("naLeftName");
-  const leftFade = document.getElementById("naLeftFade");
-  const leftMore = document.getElementById("naLeftMore");
+  const closeBtn = document.getElementById("naClose");
+  const prevBtn = document.getElementById("naPrev");
+  const nextBtn = document.getElementById("naNext");
 
-  const modal = document.getElementById("naModal");
-  const modalTitle = document.getElementById("naModalTitle");
-  const modalMock1 = document.getElementById("naModalMock1");
-  const modalMock2 = document.getElementById("naModalMock2");
+  const displayName = document.getElementById("naDisplayName");
+  const nowName = document.getElementById("naName");
 
+  if (!slider || !box || !mainImg || !mockImg) return;
+
+  // Only real cards (ignore duplicates)
   const cards = Array.from(slider.querySelectorAll(".na-card"))
     .filter(c => !c.classList.contains("na-dup"));
 
   if (cards.length === 0) return;
 
+  // Auto-slide settings
   const PX_PER_TICK = 0.7;
   const TICK_MS = 16;
-  const RESUME_AFTER_MS = 3700;
+  const RESUME_AFTER_MS = 3800;
 
   let paused = false;
   let resumeTimer = null;
-  let activeIndex = 0;
 
-  function getCardData(card) {
-    return {
-      name: card.getAttribute("data-name") || "",
-      main: card.getAttribute("data-main") || "",
-      mock1: card.getAttribute("data-mock1") || "",
-      mock2: card.getAttribute("data-mock2") || ""
-    };
-  }
-
-  function setActive(i) {
-    activeIndex = (i + cards.length) % cards.length;
-    const data = getCardData(cards[activeIndex]);
-
-    if (nameEl) nameEl.textContent = data.name;
-
-    if (leftFade) leftFade.style.opacity = "1";
-    window.setTimeout(() => {
-      if (leftImg) leftImg.src = data.main;
-      if (leftName) leftName.textContent = data.name;
-      if (leftFade) leftFade.style.opacity = "0";
-    }, 220);
-
-    if (leftMore) {
-      leftMore.dataset.main = data.main;
-      leftMore.dataset.name = data.name;
-      leftMore.dataset.mock1 = data.mock1;
-      leftMore.dataset.mock2 = data.mock2;
-    }
-  }
-
-  function openModalFromData(data) {
-    if (!modal) return;
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
-    if (modalTitle) modalTitle.textContent = data.name || "PRODUCT";
-    if (modalMock1) modalMock1.src = data.mock1 || data.main || "";
-    if (modalMock2) modalMock2.src = data.mock2 || data.main || "";
-  }
-
-  function closeModal() {
-    if (!modal) return;
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-  }
+  // Mock state
+  let mocks = [];
+  let mockIndex = 0;
 
   function pauseThenResume() {
     paused = true;
-    if (resumeTimer) window.clearTimeout(resumeTimer);
-    resumeTimer = window.setTimeout(() => {
+    if (resumeTimer) clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
       paused = false;
     }, RESUME_AFTER_MS);
   }
 
-  // Initial
-  setActive(0);
+  function showMainOnly() {
+    box.classList.remove("show-mockup");
+    mockImg.classList.remove("is-visible");
+    mainImg.classList.add("is-visible");
+    mocks = [];
+  }
 
-  // Card button opens modal
+  function showMock(i) {
+    if (mocks.length === 0) return;
+    mockIndex = (i + mocks.length) % mocks.length;
+
+    mockImg.src = mocks[mockIndex];
+    mainImg.classList.remove("is-visible");
+    mockImg.classList.add("is-visible");
+    box.classList.add("show-mockup");
+  }
+
+  function setLeftToCard(card) {
+    const name = card.getAttribute("data-name") || "";
+    const main = card.getAttribute("data-main") || "";
+    const m1 = card.getAttribute("data-mock1") || "";
+    const m2 = card.getAttribute("data-mock2") || "";
+
+    // Update text (black on white)
+    if (displayName) displayName.textContent = name;
+    if (nowName) nowName.textContent = name;
+
+    // IMPORTANT: Only update left image if NOT currently showing mockups
+    if (!box.classList.contains("show-mockup")) {
+      mainImg.src = main;
+      mainImg.classList.add("is-visible");
+      mockImg.classList.remove("is-visible");
+      mockImg.src = "";
+    }
+
+    // Save mocks for when user taps
+    card._mocks = [m1, m2].filter(Boolean);
+  }
+
+  // Init left with first real card
+  setLeftToCard(cards[0]);
+
+  // Tap card OR SEE MORE => show mock in left box (not modal)
   slider.addEventListener("click", (e) => {
-    const btn = e.target.closest(".na-card-more");
-    if (!btn) return;
-
-    const card = btn.closest(".na-card");
+    const card = e.target.closest(".na-card");
     if (!card || card.classList.contains("na-dup")) return;
 
     pauseThenResume();
-    openModalFromData(getCardData(card));
+
+    // Ensure left display text/main matches tapped product
+    setLeftToCard(card);
+
+    // Then show mockups inside box
+    mocks = (card._mocks || []).slice();
+    if (mocks.length) {
+      showMock(0);
+    }
   });
 
-  // Left SEE MORE opens current
-  if (leftMore) {
-    leftMore.addEventListener("click", () => {
+  // Controls inside box (tap)
+  if (prevBtn) {
+    prevBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
       pauseThenResume();
-      openModalFromData({
-        name: leftMore.dataset.name || (leftName ? leftName.textContent : "PRODUCT"),
-        main: leftMore.dataset.main || (leftImg ? leftImg.src : ""),
-        mock1: leftMore.dataset.mock1 || (leftImg ? leftImg.src : ""),
-        mock2: leftMore.dataset.mock2 || (leftImg ? leftImg.src : "")
-      });
+      showMock(mockIndex - 1);
     });
   }
 
-  // Close modal
-  if (modal) {
-    modal.addEventListener("click", (e) => {
-      if (e.target && e.target.dataset && e.target.dataset.close) closeModal();
+  if (nextBtn) {
+    nextBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      pauseThenResume();
+      showMock(mockIndex + 1);
     });
   }
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal && modal.classList.contains("is-open")) closeModal();
-  });
 
-  // Pause on interaction (FIXED)
+  if (closeBtn) {
+    closeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showMainOnly();
+      pauseThenResume();
+    });
+  }
+
+  // Resume if user scrolls page (your rule)
+  let scrollTimer;
+  window.addEventListener("scroll", () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      // If mockups open, revert back to main after scroll
+      if (box.classList.contains("show-mockup")) showMainOnly();
+      paused = false;
+    }, 180);
+  }, { passive: true });
+
+  // Also pause on direct slider interaction
   ["pointerdown", "touchstart", "wheel"].forEach((evt) => {
     slider.addEventListener(evt, pauseThenResume, { passive: true });
   });
 
-  // Auto scroll tick
+  // Auto scroll loop + keep updating left product name/main (when not in mock view)
   function tick() {
     if (!paused) {
       slider.scrollLeft += PX_PER_TICK;
@@ -294,15 +311,15 @@ window.addEventListener("scroll", () => {
       const cardW = cards[0].getBoundingClientRect().width + 12;
       const idx = Math.floor(slider.scrollLeft / cardW) % cards.length;
 
-      if (idx !== activeIndex) setActive(idx);
+      // Update left display to match current index ONLY if not in mock mode
+      setLeftToCard(cards[idx]);
 
       const maxBeforeReset = cardW * cards.length;
       if (slider.scrollLeft >= maxBeforeReset) {
         slider.scrollLeft -= maxBeforeReset;
       }
     }
-
-    window.setTimeout(tick, TICK_MS);
+    setTimeout(tick, TICK_MS);
   }
 
   tick();
