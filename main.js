@@ -134,9 +134,12 @@ window.addEventListener("scroll", () => {
 
   cards.forEach(c => io.observe(c));
 
-  // Safe loop: when you reach the duplicate end card, jump back to the first
-  let loopLock = false;
-  scroller.addEventListener("scroll", () => {
+ // Safe loop: when you reach the duplicate end card, jump back to the first
+let loopLock = false;
+
+scroller.addEventListener(
+  "scroll",
+  () => {
     if (loopLock) return;
 
     const endCard = scroller.querySelector('[data-loop="end"]');
@@ -148,12 +151,14 @@ window.addEventListener("scroll", () => {
 
     // if end card is mostly visible
     const visible = endRect.left < (rootRect.left + 30);
+
     if (visible) {
       loopLock = true;
-      // jump back instantly (no break, no flicker)
       scroller.scrollLeft = 0;
-      setTimeout(() => { loopLock = false; }, 120);
+      setTimeout(() => {
+        loopLock = false;
+      }, 120);
     }
-  }, { passive: true });
-})();
-
+  },
+  { passive: true }
+);
