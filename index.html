@@ -166,133 +166,125 @@
     </header>
 
     <div class="na-grid">
-      <!-- LEFT PINNED PRODUCT (does not move) -->
+      <!-- LEFT PINNED PRODUCT -->
       <aside class="na-left" aria-label="Featured new arrival">
         <div class="na-left-media">
-          <img id="naLeftImg" src="assets/na-1-main.jpg" alt="New arrival product preview" />
+          <!-- IMPORTANT: use a real file that exists -->
+          <img id="naLeftImg" src="assets/ctank-black-main.jpg" alt="New arrival product preview" />
           <div class="na-left-fade" id="naLeftFade" aria-hidden="true"></div>
         </div>
 
         <div class="na-left-meta">
-          <div class="na-left-name" id="naLeftName">C-LUXURY ITEM 01</div>
+          <div class="na-left-name" id="naLeftName">C-TANK BLACK SKULL JERSEY</div>
           <button class="na-left-more" type="button" id="naLeftMore">SEE MORE</button>
         </div>
       </aside>
 
-     <!-- RIGHT SLIDER -->
+      <!-- RIGHT SLIDER -->
       <div class="na-right">
-        <div class="na-slider" id="naSlider" aria-label="New arrivals <!-- 1) BLACK -->
-<article class="na-card"
-  data-name="C-TANK BLACK SKULL JERSEY"
-  data-main="assets/ctank-black-main.jpg"
-  data-mock1="assets/cluxury-black-mock1.jpg"
-  data-mock2="assets/cluxury-black-mock2.jpg">
-  <div class="na-card-img" style="background-image:url('assets/ctank-black-main.jpg')"></div>
-  <button class="na-card-more" type="button">SEE MORE</button>
-</article>
+        <div class="na-slider" id="naSlider" aria-label="New arrivals slider">
+          <!-- 1) BLACK -->
+          <article class="na-card"
+            data-name="C-TANK BLACK SKULL JERSEY"
+            data-main="assets/ctank-black-main.jpg"
+            data-mock1="assets/cluxury-black-mock1.jpg"
+            data-mock2="assets/cluxury-black-mock2.jpg">
+            <div class="na-card-img" style="background-image:url('assets/ctank-black-main.jpg')"></div>
+            <button class="na-card-more" type="button">SEE MORE</button>
+          </article>
 
-<!-- 2) RED -->
-<article class="na-card"
-  data-name="C-TANK RED SKULL JERSEY"
-  data-main="assets/ctank-red-main.jpg"
-  data-mock1="assets/cluxury-red-mock1.jpg"
-  data-mock2="assets/cluxury-red-mock2.jpg">
-  <div class="na-card-img" style="background-image:url('assets/ctank-red-main.jpg')"></div>
-  <button class="na-card-more" type="button">SEE MORE</button>
-</article>
+          <!-- 2) RED -->
+          <article class="na-card"
+            data-name="C-TANK RED SKULL JERSEY"
+            data-main="assets/ctank-red-main.jpg"
+            data-mock1="assets/cluxury-red-mock1.jpg"
+            data-mock2="assets/cluxury-red-mock2.jpg">
+            <div class="na-card-img" style="background-image:url('assets/ctank-red-main.jpg')"></div>
+            <button class="na-card-more" type="button">SEE MORE</button>
+          </article>
 
-<!-- 3) GREY -->
-<article class="na-card"
-  data-name="C-TANK GREY SKULL JERSEY"
-  data-main="assets/ctank-grey-main.jpg"
-  data-mock1="assets/cluxury-grey-mock1.jpg"
-  data-mock2="assets/cluxury-grey-mock2.jpg">
-  <div class="na-card-img" style="background-image:url('assets/ctank-grey-main.jpg')"></div>
-  <button class="na-card-more" type="button">SEE MORE</button>
-</article>
+          <!-- 3) GREY -->
+          <article class="na-card"
+            data-name="C-TANK GREY SKULL JERSEY"
+            data-main="assets/ctank-grey-main.jpg"
+            data-mock1="assets/cluxury-grey-mock1.jpg"
+            data-mock2="assets/cluxury-grey-mock2.jpg">
+            <div class="na-card-img" style="background-image:url('assets/ctank-grey-main.jpg')"></div>
+            <button class="na-card-more" type="button">SEE MORE</button>
+          </article>
 
-<!-- 4) GREEN -->
-<article class="na-card"
-  data-name="C-TANK GREEN SKULL JERSEY"
-  data-main="assets/ctank-green-main.jpg"
-  data-mock1="assets/cluxury-green-mock1.jpg"
-  data-mock2="assets/cluxury-green-mock2.jpg">
-  <div class="na-card-img" style="background-image:url('assets/ctank-green-main.jpg')"></div>
-  <button class="na-card-more" type="button">SEE MORE</button>
-</article>
-          
-          <!-- DUPLICATE first cards for smooth loop -->
-<article class="na-card na-dup" aria-hidden="true"
-  data-name="C-TANK BLACK SKULL JERSEY"
-  data-main="assets/ctank-black-main.jpg"
-  data-mock1="assets/cluxury-black-mock1.jpg"
-  data-mock2="assets/cluxury-black-mock2.jpg">
-  <div class="na-card-img" style="background-image:url('assets/ctank-black-main.jpg')"></div>
-  <button class="na-card-more" type="button" tabindex="-1">SEE MORE</button>
-</article>
+          <!-- 4) GREEN -->
+          <article class="na-card"
+            data-name="C-TANK GREEN SKULL JERSEY"
+            data-main="assets/ctank-green-main.jpg"
+            data-mock1="assets/cluxury-green-mock1.jpg"
+            data-mock2="assets/cluxury-green-mock2.jpg">
+            <div class="na-card-img" style="background-image:url('assets/ctank-green-main.jpg')"></div>
+            <button class="na-card-more" type="button">SEE MORE</button>
+          </article>
 
-<article class="na-card na-dup" aria-hidden="true"
-  data-name="C-TANK RED SKULL JERSEY"
-  data-main="assets/ctank-red-main.jpg"
-  data-mock1="assets/cluxury-red-mock1.jpg"
-  data-mock2="assets/cluxury-red-mock2.jpg">
-  <div class="na-card-img" style="background-image:url('assets/ctank-red-main.jpg')"></div>
-  <button class="na-card-more" type="button" tabindex="-1">SEE MORE</button>
-</article>
+          <!-- DUPLICATES for smooth loop (hidden from screen readers) -->
+          <article class="na-card na-dup" aria-hidden="true" tabindex="-1"
+            data-name="C-TANK BLACK SKULL JERSEY"
+            data-main="assets/ctank-black-main.jpg"
+            data-mock1="assets/cluxury-black-mock1.jpg"
+            data-mock2="assets/cluxury-black-mock2.jpg">
+            <div class="na-card-img" style="background-image:url('assets/ctank-black-main.jpg')"></div>
+            <button class="na-card-more" type="button" tabindex="-1">SEE MORE</button>
+          </article>
 
-<article class="na-card na-dup" aria-hidden="true"
-  data-name="C-TANK GREY SKULL JERSEY"
-  data-main="assets/ctank-grey-main.jpg"
-  data-mock1="assets/cluxury-grey-mock1.jpg"
-  data-mock2="assets/cluxury-grey-mock2.jpg">
-  <div class="na-card-img" style="background-image:url('assets/ctank-grey-main.jpg')"></div>
-  <button class="na-card-more" type="button" tabindex="-1">SEE MORE</button>
-</article>
+          <article class="na-card na-dup" aria-hidden="true" tabindex="-1"
+            data-name="C-TANK RED SKULL JERSEY"
+            data-main="assets/ctank-red-main.jpg"
+            data-mock1="assets/cluxury-red-mock1.jpg"
+            data-mock2="assets/cluxury-red-mock2.jpg">
+            <div class="na-card-img" style="background-image:url('assets/ctank-red-main.jpg')"></div>
+            <button class="na-card-more" type="button" tabindex="-1">SEE MORE</button>
+          </article>
 
-<article class="na-card na-dup" aria-hidden="true"
-  data-name="C-TANK GREEN SKULL JERSEY"
-  data-main="assets/ctank-green-main.jpg"
-  data-mock1="assets/cluxury-green-mock1.jpg"
-  data-mock2="assets/cluxury-green-mock2.jpg">
-  <div class="na-card-img" style="background-image:url('assets/ctank-green-main.jpg')"></div>
-  <button class="na-card-more" type="button" tabindex="-1">SEE MORE</button>
-</article>
+          <article class="na-card na-dup" aria-hidden="true" tabindex="-1"
+            data-name="C-TANK GREY SKULL JERSEY"
+            data-main="assets/ctank-grey-main.jpg"
+            data-mock1="assets/cluxury-grey-mock1.jpg"
+            data-mock2="assets/cluxury-grey-mock2.jpg">
+            <div class="na-card-img" style="background-image:url('assets/ctank-grey-main.jpg')"></div>
+            <button class="na-card-more" type="button" tabindex="-1">SEE MORE</button>
+          </article>
+
+          <article class="na-card na-dup" aria-hidden="true" tabindex="-1"
+            data-name="C-TANK GREEN SKULL JERSEY"
+            data-main="assets/ctank-green-main.jpg"
+            data-mock1="assets/cluxury-green-mock1.jpg"
+            data-mock2="assets/cluxury-green-mock2.jpg">
+            <div class="na-card-img" style="background-image:url('assets/ctank-green-main.jpg')"></div>
+            <button class="na-card-more" type="button" tabindex="-1">SEE MORE</button>
+          </article>
+        </div>
 
         <!-- NAME BELOW SLIDER -->
-<!-- NAME BELOW SLIDER -->
-<div class="na-namebar">
-  <span class="na-now">NOW:</span>
-  <span class="na-name" id="naName"></span>
-</div>
-
-<!-- MODAL (fade in reveal) -->
-<div class="na-modal" id="naModal" aria-hidden="true">
-  <div class="na-modal-backdrop" data-close="1"></div>
-
-  <div
-    class="na-modal-panel"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Product preview"
-  >
-    <button class="na-modal-x" type="button" data-close="1" aria-label="Close">×</button>
-
-    <div class="na-modal-title" id="naModalTitle">PRODUCT</div>
-
-    <div class="na-modal-mocks">
-      <img id="naModalMock1" src="" alt="Mockup 1" />
-      <img id="naModalMock2" src="" alt="Mockup 2" />
+        <div class="na-namebar">
+          <span class="na-now">NOW:</span>
+          <span class="na-name" id="naName">C-TANK BLACK SKULL JERSEY</span>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-      <img id="naModalMock2" src="" alt="Mockup 2" />
+
+  <!-- MODAL -->
+  <div class="na-modal" id="naModal" aria-hidden="true">
+    <div class="na-modal-backdrop" data-close="1"></div>
+
+    <div class="na-modal-panel" role="dialog" aria-modal="true" aria-label="Product preview">
+      <button class="na-modal-x" type="button" data-close="1" aria-label="Close">×</button>
+
+      <div class="na-modal-title" id="naModalTitle">PRODUCT</div>
+
+      <div class="na-modal-mocks">
+        <img id="naModalMock1" src="" alt="Mockup 1" />
+        <img id="naModalMock2" src="" alt="Mockup 2" />
+      </div>
     </div>
   </div>
-</div>
-      
+</section>
+
 <script src="main.js"></script>
-</body>
-</html>
-
-
-  
